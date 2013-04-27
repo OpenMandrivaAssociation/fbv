@@ -40,7 +40,8 @@ supports PNG, JPEG, GIF and BMP files.
 %prep
 %setup -q
 %patch0 -p1
-iconv -f iso8859-1 -t utf-8 ChangeLog 
+iconv -f iso8859-1 -t utf-8 ChangeLog > ChangeLog.conv && \
+	mv -f ChangeLog.conv ChangeLog
 
 %build
 ./configure --prefix=/usr --mandir=%_mandir
