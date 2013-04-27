@@ -13,7 +13,7 @@ Version:	%{version}
 Release:	%{release}
 Summary:	Framebuffer image viewer
 Group:		Graphical desktop/Other
-License:	GPL
+License:	GPLv2
 URL:		http://s-tech.elsat.net.pl/fbv
 Source0:	http://s-tech.elsat.net.pl/fbv//%name-%version.tar.gz
 #patch from alt-linux
@@ -26,11 +26,12 @@ BuildRequires:	xorg-x11
 BuildRequires:	zlib-devel
 # missing common provides for libs ..
 Requires:	%{_lib}jpeg8
-Requires:	%{_lib}xorg-x11
 Requires:	%{_lib}gif4
+%if %{mdvver} >= 201210
+Requires:	%{_lib}png15
+%else
 Requires:	libpng
-
-
+%endif
 
 %description
 A simple program to view pictures on a framebuffer console. It
@@ -39,6 +40,7 @@ supports PNG, JPEG, GIF and BMP files.
 %prep
 %setup -q
 %patch0 -p1
+iconv -f iso8859-1 -t utf-8 ChangeLog 
 
 %build
 ./configure --prefix=/usr --mandir=%_mandir
