@@ -41,7 +41,7 @@ supports PNG, JPEG, GIF and BMP files.
 %patch0 -p1
 
 %build
-%configure --prefix=/usr --mandir=%_mandir
+./configure --prefix=/usr --mandir=%_mandir
 
 sed -i 's|LIBS.*|LIBS=-lpng -ljpeg -lungif -lgif|' Make.conf
 sed -i 's|setjmp(png_ptr->jmpbuf)|setjmp(png_jmpbuf(png_ptr))|' png.c
