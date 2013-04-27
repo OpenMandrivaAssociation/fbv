@@ -1,0 +1,90 @@
+diff -u fbv-1.0b.oryg/ChangeLog fbv-1.0b/ChangeLog
+--- fbv-1.0b.oryg/ChangeLog	2004-09-20 15:55:18.256629728 +0200
++++ fbv-1.0b/ChangeLog	2004-09-20 16:32:28.095642672 +0200
+@@ -1,3 +1,6 @@
++	2003-10-19	Pawe³ ¯urowski	pzurowski@post.pl
++      * added --nocenter option: image won't be in center of the screen. Useful with -c and -i options. Based on contributed patch from fbgetty
++      
+ 0.99    2003-08-24      Mateusz Golicz mtg@elsat.net.pl
+       * fixes in transparent and interlaced GIF & PNG support
+       * support for using the alpha channel
+diff -u fbv-1.0b.oryg/fbv.1 fbv-1.0b/fbv.1
+--- fbv-1.0b.oryg/fbv.1	2004-09-20 15:55:18.255629880 +0200
++++ fbv-1.0b/fbv.1	2004-09-20 16:27:58.418639808 +0200
+@@ -28,6 +28,9 @@
+ .BR \fB--noclear\fP , \fB-c\fP	
+ Do not clear the screen before/after displaying image
+ .TP
++.BR \fB--nocenter\fP , \fB-z\fP
++Do not center image on the screen
++.TP
+ .BR \fB--unhide\fP , \fB-u\fP
+ Do not hide/show cursor before/after displaying image
+ .TP
+diff -u fbv-1.0b.oryg/main.c fbv-1.0b/main.c
+--- fbv-1.0b.oryg/main.c	2004-09-20 15:55:18.257629576 +0200
++++ fbv-1.0b/main.c	2004-09-20 16:47:53.286992208 +0200
+@@ -38,7 +38,8 @@
+ 	   opt_stretch = 0,
+ 	   opt_delay = 0,
+ 	   opt_enlarge = 0,
+-	   opt_ignore_aspect = 0;
++	   opt_ignore_aspect = 0,
++	   opt_nocenter = 1;
+ 
+ 
+ 
+@@ -308,12 +309,12 @@
+ 		}
+ 		if(refresh)
+ 		{
+-			if(i.width < screen_width)
++			if((i.width < screen_width) && opt_nocenter)
+ 				x_offs = (screen_width - i.width) / 2;
+ 			else
+ 				x_offs = 0;
+ 			
+-			if(i.height < screen_height)
++			if((i.height < screen_height) && opt_nocenter)
+ 				y_offs = (screen_height - i.height) / 2;
+ 			else
+ 				y_offs = 0;
+@@ -443,8 +444,9 @@
+ 		   "Available options:\n"
+ 		   " --help        | -h : Show this help\n"
+ 		   " --alpha       | -a : Use the alpha channel (if applicable)\n"
+-		   " --dontclear   | -c : Do not clear the screen before and after displaying the image\n"
+-		   " --donthide    | -u : Do not hide the cursor before and after displaying the image\n"
++		   " --noclear     | -c : Do not clear the screen before and after displaying the image\n"
++		   " --unhide      | -u : Do not hide the cursor before and after displaying the image\n"
++		   " --nocenter    | -z : Do not center image on the screen (useful with  -c and -i)\n"
+ 		   " --noinfo      | -i : Supress image information\n"
+ 		   " --stretch     | -f : Strech (using a simple resizing routine) the image to fit onto screen if necessary\n"
+ 		   " --colorstretch| -k : Strech (using a 'color average' resizing routine) the image to fit onto screen if necessary\n"
+@@ -484,6 +486,7 @@
+ 		{"noclear", 	no_argument, 	0, 'c'},
+ 		{"alpha", 	no_argument, 	0, 'a'},
+ 		{"unhide",  	no_argument, 	0, 'u'},
++		{"nocenter",  	no_argument, 	0, 'z'},
+ 		{"noinfo",  	no_argument, 	0, 'i'},
+ 		{"stretch", 	no_argument, 	0, 'f'},
+ 		{"colorstrech", no_argument, 	0, 'k'},
+@@ -501,7 +504,7 @@
+ 		return(1);
+ 	}
+ 	
+-	while((c = getopt_long_only(argc, argv, "hcauifks:er", long_options, NULL)) != EOF)
++	while((c = getopt_long_only(argc, argv, "hcauifks:erz", long_options, NULL)) != EOF)
+ 	{
+ 		switch(c)
+ 		{
+@@ -535,6 +538,9 @@
+ 			case 'r':
+ 				opt_ignore_aspect = 1;
+ 				break;
++			case 'z':
++				opt_nocenter = 0;
++				break;
+ 		}
+ 	}
+ 	
