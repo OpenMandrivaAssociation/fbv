@@ -40,12 +40,11 @@ supports PNG, JPEG, GIF and BMP files.
 %setup -q
 %patch0 -p1
 
+%build
+%configure --prefix=/usr --mandir=%_mandir
+
 sed -i 's|LIBS.*|LIBS=-lpng -ljpeg -lungif -lgif|' Make.conf
 sed -i 's|setjmp(png_ptr->jmpbuf)|setjmp(png_jmpbuf(png_ptr))|' png.c
-
-%build
-
-./configure --prefix=/usr --mandir=%_mandir
 
 %make CFLAGS="$CFLAGS $RPM_OPT_FLAGS"
 
