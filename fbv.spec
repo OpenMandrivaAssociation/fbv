@@ -28,7 +28,7 @@ BuildRequires:	xorg-x11
 BuildRequires:	zlib-devel
 # missing common provides for libs ..
 Requires:	%{_lib}jpeg8
-Requires:	%{_lib}gif4
+Requires:	%{_lib}gif6
 %if %{mdvver} >= 201210
 Requires:	%{_lib}png15
 %else
@@ -50,7 +50,7 @@ iconv -f iso8859-1 -t utf-8 ChangeLog > ChangeLog.conv && \
 %build
 ./configure --prefix=/usr --mandir=%_mandir
 
-sed -i 's|LIBS.*|LIBS=-lpng -ljpeg -lungif -lgif|' Make.conf
+sed -i 's|LIBS.*|LIBS=-lpng -ljpeg -lgif|' Make.conf
 sed -i 's|setjmp(png_ptr->jmpbuf)|setjmp(png_jmpbuf(png_ptr))|' png.c
 
 %make CFLAGS="$CFLAGS $RPM_OPT_FLAGS"
