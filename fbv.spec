@@ -30,7 +30,7 @@ BuildRequires:	zlib-devel
 Requires:	%{_lib}jpeg8
 Requires:	%{_lib}gif6
 %if %{mdvver} >= 201210
-Requires:	%{_lib}png15
+Requires:	%{_lib}png15_15
 %else
 Requires:	libpng
 %endif
