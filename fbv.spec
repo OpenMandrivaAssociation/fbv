@@ -4,9 +4,10 @@
 # MRB-Falticska Florin
 ######################################################
 %define debug_package	%{nil}
+%define  distsuffix mrb
 %define	name	fbv
 %define	version	1.0b
-%define	release	3
+%define	release	69
 
 Name:		%{name}
 Version:	%{version}
