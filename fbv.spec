@@ -20,7 +20,7 @@ Source0:	http://s-tech.elsat.net.pl/fbv//%name-%version.tar.gz
 #patch from alt-linux
 Patch0:		fbv-nocenter.patch
 Patch1:		giflib.patch
-BuildRequires:	libjpeg-devel 
+BuildRequires:	jpeg-devel 
 BuildRequires:	libpng-devel 
 BuildRequires:	giflib-devel
 BuildRequires:	X11-devel
