@@ -3,7 +3,7 @@
 Summary:	Framebuffer image viewer
 Name:		fbv
 Version:	1.0b
-Release:	4
+Release:	5
 License:	GPLv2+
 Group:		Graphical desktop/Other
 Url:		http://s-tech.elsat.net.pl/fbv
