@@ -10,7 +10,10 @@ Url:		http://s-tech.elsat.net.pl/fbv
 Source0:	http://s-tech.elsat.net.pl/fbv/%{name}-%{version}.tar.gz
 #patch from alt-linux
 Patch0:		fbv-nocenter.patch
-Patch1:		giflib-5.1.patch
+Patch1: fbv-1.0b-features.h.patch
+Patch2: fbv-1.0b-libpng15.patch
+Patch3: giflib-5.1.patch
+
 BuildRequires:	giflib-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(libpng)
@@ -26,6 +29,9 @@ supports PNG, JPEG, GIF and BMP files.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p2
+%patch3 -p1
+
 
 iconv -f iso8859-1 -t utf-8 ChangeLog > ChangeLog.conv && \
 	mv -f ChangeLog.conv ChangeLog
@@ -38,8 +44,8 @@ export CXX=g++
 	--prefix=%{_prefix} \
 	--mandir=%{_mandir}
 
-sed -i 's|LIBS.*|LIBS=-lpng -ljpeg -lungif -lgif|' Make.conf
-sed -i 's|setjmp(png_ptr->jmpbuf)|setjmp(png_jmpbuf(png_ptr))|' png.c
+#sed -i 's|LIBS.*|LIBS=-lpng -ljpeg -lungif -lgif|' Make.conf
+#sed -i 's|setjmp(png_ptr->jmpbuf)|setjmp(png_jmpbuf(png_ptr))|' png.c
 
 %make CFLAGS="%{optflags}"
 
