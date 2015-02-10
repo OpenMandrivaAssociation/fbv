@@ -10,6 +10,7 @@ Url:		http://s-tech.elsat.net.pl/fbv
 Source0:	http://s-tech.elsat.net.pl/fbv/%{name}-%{version}.tar.gz
 #patch from alt-linux
 Patch0:		fbv-nocenter.patch
+Patch1:		giflib-5.1.patch
 BuildRequires:	giflib-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(libpng)
@@ -24,6 +25,8 @@ supports PNG, JPEG, GIF and BMP files.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
+
 iconv -f iso8859-1 -t utf-8 ChangeLog > ChangeLog.conv && \
 	mv -f ChangeLog.conv ChangeLog
 
