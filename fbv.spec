@@ -15,6 +15,7 @@ BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(zlib)
+BuildRequires:	gcc-c++, gcc, gcc-cpp
 
 %description
 A simple program to view pictures on a framebuffer console. It
@@ -27,6 +28,9 @@ iconv -f iso8859-1 -t utf-8 ChangeLog > ChangeLog.conv && \
 	mv -f ChangeLog.conv ChangeLog
 
 %build
+export CC=gcc
+export CXX=g++
+
 ./configure \
 	--prefix=%{_prefix} \
 	--mandir=%{_mandir}
