@@ -6,7 +6,7 @@ Version:	1.0b
 Release:	5
 License:	GPLv2+
 Group:		Graphical desktop/Other
-Url:		http://s-tech.elsat.net.pl/fbv
+Url:		https://s-tech.elsat.net.pl/fbv
 Source0:	http://s-tech.elsat.net.pl/fbv/%{name}-%{version}.tar.gz
 #patch from alt-linux
 Patch0:		fbv-nocenter.patch
