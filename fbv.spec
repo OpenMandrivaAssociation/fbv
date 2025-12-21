@@ -14,6 +14,11 @@ Patch1: fbv-1.0b-features.h.patch
 Patch2: fbv-1.0b-libpng15.patch
 Patch3: giflib-5.1.patch
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	giflib-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(libpng)
